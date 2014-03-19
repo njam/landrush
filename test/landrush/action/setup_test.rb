@@ -67,7 +67,7 @@ module Landrush
         it "stores the machine's hostname => ip address" do
           app = Proc.new {}
           setup = Setup.new(app, nil)
-          env = fake_environment
+          env = fake_environment(enabled: true)
 
           setup.call(env)
 
@@ -77,9 +77,8 @@ module Landrush
         it "does nothing if it is not enabled via config" do
           app = Proc.new {}
           setup = Setup.new(app, nil)
-          env = fake_environment
+          env = fake_environment(enabled: false)
 
-          env[:machine].config.landrush.disable
           setup.call(env)
 
           Store.hosts.get('somehost.vagrant.dev').must_equal nil

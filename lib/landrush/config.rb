@@ -11,7 +11,11 @@ module Landrush
       @upstream_servers = @default_upstream
     end
 
-    def enable(enabled=true)
+    def enabled=(newval)
+      @enabled = newval
+    end
+
+    def enable
       @enabled = true
     end
 
@@ -45,7 +49,7 @@ module Landrush
         @upstream_servers.push [:tcp, ip, port]
       else
         @upstream_servers.push [protocol, ip, port]
-      end 
+      end
     end
 
     def merge(other)
